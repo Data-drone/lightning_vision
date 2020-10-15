@@ -1,0 +1,6 @@
+.ipynb_checkpoints/*
+lightning_logs/*
+MNIST
+*/.ipynb_checkpoints
+notebooks/FashionMNIST
+notebooks/lightning_logs
