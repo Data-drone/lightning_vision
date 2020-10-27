@@ -27,7 +27,7 @@ class MNISTModel(pl.LightningModule):
     def training_step(self, batch, batch_nb):
         x, y = batch
         loss = F.cross_entropy(self(x), y)
-        return pl.TrainResult(loss)
+        return loss
 
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(), lr=0.02)
@@ -41,11 +41,13 @@ if __name__ == '__main__':
 
     # Init DataLoader from MNIST Dataset
     train_ds = MNIST(os.getcwd(), train=True, download=True, transform=transforms.ToTensor())
-    train_loader = DataLoader(train_ds, batch_size=32)
+    train_loader = DataLoader(train_ds, batch_size=32, num_workers = 8)
 
     # Initialize a trainer
     # gpus = 1 
-    trainer = pl.Trainer(max_epochs=3, progress_bar_refresh_rate=20)
+    # distributed_backend='ddp_cpu',
+    #trainer = pl.Trainer(max_epochs=3, progress_bar_refresh_rate=20)
+    trainer = pl.Trainer(gpus=2, distributed_backend='ddp', max_epochs=3, progress_bar_refresh_rate=20)
 
     # Train the model ⚡
     trainer.fit(mnist_model, train_loader)
