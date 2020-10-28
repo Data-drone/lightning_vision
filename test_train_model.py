@@ -46,8 +46,8 @@ if __name__ == '__main__':
     # Initialize a trainer
     # gpus = 1 
     # distributed_backend='ddp_cpu',
-    #trainer = pl.Trainer(max_epochs=3, progress_bar_refresh_rate=20)
-    trainer = pl.Trainer(gpus=2, distributed_backend='ddp', max_epochs=3, progress_bar_refresh_rate=20)
+    trainer = pl.Trainer(max_epochs=3, progress_bar_refresh_rate=20)
+    #trainer = pl.Trainer(gpus=2, distributed_backend='ddp', max_epochs=3, progress_bar_refresh_rate=20)
 
     # Train the model ⚡
     trainer.fit(mnist_model, train_loader)
