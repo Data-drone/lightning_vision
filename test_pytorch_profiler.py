@@ -38,8 +38,11 @@ def torchprof(model, inputs):
 
 if __name__ == '__main__':
 
-    model = models.resnet18()
+    #model = models.resnet18()
     inputs = torch.randn(5, 3, 224, 224)
 
     #default_profile(model, inputs)
+    #torchprof(model, inputs)
+
+    model = models.resnet34()
     torchprof(model, inputs)
